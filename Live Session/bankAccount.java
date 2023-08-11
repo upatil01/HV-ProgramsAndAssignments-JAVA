@@ -47,10 +47,10 @@ public class bankAccount {
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Scanner Sc = new Scanner(System.in);
 
         System.out.println("Enter Account owner name: ");
-        String name = sc.next();
+        String name = Sc.next();
 
         bankAccount obj = new bankAccount(name);
         boolean exit = false;
@@ -62,17 +62,17 @@ public class bankAccount {
             System.out.println("4.Exit");
 
             System.out.println("Select any option from above: ");
-            int option = sc.nextInt();
+            int option = Sc.nextInt();
 
             switch (option) {
                 case 1:
                     System.out.println("How much you want to deposit: ");
-                    double depositAmount = sc.nextDouble();
+                    double depositAmount = Sc.nextDouble();
                     obj.depositeMoney(depositAmount);
                     break;
                 case 2:
                     System.out.println("How much you want to withdraw: ");
-                    double withAmount = sc.nextDouble();
+                    double withAmount = Sc.nextDouble();
                     obj.withdrawMoney(withAmount);
                     break;
                 case 3:
@@ -86,5 +86,6 @@ public class bankAccount {
                     break;
             }
         }
+        Sc.close();
     }
 }
