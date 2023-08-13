@@ -6,64 +6,126 @@ class Product {
     private double price;
     private int quantity;
 
-    // constructor
+    // getters
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public Product(String name, double price, int quantity) {
+
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+    }
 
     public void display() {
+
+        System.out.println("Name" + name + " | Price: " + price + "| Quantity: " + quantity);
     }
 
     public double calculateValue() {
-        return quantity * price;        
+
+        return price * quantity;
+
     }
 
     public void sell(int quantitySold) {
-        
+
+        if (quantitySold < quantity) {
+            System.out.println("Total Quantity remaining : " + (quantity - quantitySold));
+        } else {
+            System.out.println("Not enough quantity to sell");
+        }
+
     }
 
     public void applyDiscount(double discountPercentage) {
 
+        double discount = price * (discountPercentage / 100);
+        double newprice = price - discount;
+
+        System.out.println("Price after the mentioned discount:  " + newprice);
+
     }
 
     public int compare(Product other) {
-
+        if (this.price > other.price) {
+            return 1;
+        } else if (this.price < other.price) {
+            return -1;
+        } else {
+            return Integer.compare(this.quantity, other.quantity);
+        }
     }
-
+     
     public boolean searchByName(String searchName) {
+
+        return name.equalsIgnoreCase(searchName);
+
+    }
+}
+
+class Electronics extends Product {
+    private String brand;
+
+    public Electronics(String name, double price, int quantity, String brand) {
+        super(name, price, quantity);
+        this.brand = brand;
     }
 
-    class Electronics extends Product {
-        private String brand;
+    @Override
+    public void display() {
 
-        @Override
-        public void display() {
+        System.out.println("Electronics:");
+        System.out.println("Name: " + super.getName() + " | Price: " + super.getPrice() + "| Quantity: "
+                + super.getQuantity() + "| Brand: " + brand);
 
-        }
+    }
+}
+
+class Clothing extends Product {
+    private String size;
+
+    public Clothing(String name, double price, int quantity, String size) {
+        super(name, price, quantity);
+        this.size = size;
     }
 
-    class Clothing extends Product {
-        private String size;
+    @Override
+    public void display() {
 
-        public Clothing(String name, double price, int quantity, String size) {
+        System.out.println("Clothing:");
+        System.out.println("Name: " + super.getName() + " | Price: " + super.getPrice() + "| Quantity: "
+                + super.getQuantity() + "| Size: " + size);
 
-        }
+    }
+}
 
-        @Override
-        public void display() {
+class Book extends Product {
+    private String author;
 
-        }
+    public Book(String name, double price, int quantity, String author) {
+        super(name, price, quantity);
+        this.author = author;
     }
 
-    class Book extends Product {
-        private String author;
+    @Override
+    public void display() {
 
-        public Book(String name, double price, int quantity, String author) {
+        System.out.println("Books:");
+        System.out.println("Name: " + super.getName() + " | Price: " + super.getPrice() + "| Quantity: "
+                + super.getQuantity() + "| Author: " + author);
 
-        }
-
-        @Override
-        public void display() {
-
-        }
     }
+}
 
 public class inventorystoreproject {
     public static void main(String[] args) {
@@ -139,4 +201,24 @@ public class inventorystoreproject {
         }
     }
 }
+
 // Display updated inventory
+
+
+
+System.out.println("\nCompare Two Products:");
+        if (inventory.size() >= 2) {
+            Product product1 = inventory.get(0);
+            Product product2 = inventory.get(1);
+
+            int comparisonResult = product1.compare(product2);
+            if (comparisonResult > 0) {
+                System.out.println(product1.getName() + " is more expensive than " + product2.getName());
+            } else if (comparisonResult < 0) {
+                System.out.println(product1.getName() + " is cheaper than " + product2.getName());
+            } else {
+                System.out.println(product1.getName() + " has the same price as " + product2.getName());
+            }
+        } else {
+            System.out.println("Not enough products to compare.");
+        }
